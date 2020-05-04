@@ -1,5 +1,7 @@
 package io.pivotal.pal.tracker;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,9 +43,15 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
         return newTimeEntry;
     }
 
-    @Override
+    /* @Override
     public List<TimeEntry> delete(long id) {
         timeEntries.remove(id);
         return new ArrayList<>(timeEntries.values());
+    } */
+
+    @Override
+    public void delete(long id) {
+        timeEntries.remove(id);
     }
+
 }
