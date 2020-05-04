@@ -4,7 +4,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
-    id 'org.flywaydb.flyway' version '6.0.1'
+    id 'org.flywaydb.flyway' version '5.2.1'
 }
 
 repositories {
@@ -18,13 +18,9 @@ dependencies {
     }
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'mysql:mysql-connector-java'
-
-//    buildscript {
-//        dependencies {
-//            classpath 'mysql:mysql-connector-java:8.0.13'
-//        }
-//    }
 }
+
+
 
 test {
     useJUnitPlatform()
