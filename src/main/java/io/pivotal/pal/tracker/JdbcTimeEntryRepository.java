@@ -9,9 +9,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.sql.Time;
 import java.util.List;
+
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
 public class JdbcTimeEntryRepository implements TimeEntryRepository {
 
@@ -30,7 +30,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO time_entries (project_id, user_id, date, hours) " +
                             "VALUES (?, ?, ?, ?)",
-                    Statement.RETURN_GENERATED_KEYS
+                    RETURN_GENERATED_KEYS
             );
 
             statement.setLong(1, timeEntry.getProjectId());
@@ -63,8 +63,12 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
         jdbcTemplate.update("UPDATE time_entries " +
                 "SET project_id = ?, user_id = ?, date = ?, hours = ? " +
                 "WHERE id = ?",
-                timeEntry.getProjectId(), timeEntry.getUserId(),
-                Date.valueOf(timeEntry.getDate()), timeEntry.getHours(), id);
+                timeEntry.getProjectId(),
+                timeEntry.getUserId(),
+                Date.valueOf(timeEntry.getDate()),
+                timeEntry.getHours(),
+                id);
+
         return find(id);
     }
 
