@@ -30,6 +30,7 @@ public class TimeEntryController {
 
         TimeEntry createdTimeEntry = timeEntryRepository.create(timeEntry);
         actionCounter.increment();
+        timeEntrySummary.record(timeEntryRepository.list().size());
         return new ResponseEntity(createdTimeEntry, HttpStatus.CREATED);
     }
 
